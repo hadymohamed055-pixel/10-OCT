@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>10 / 10 — THE DAY</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Playfair+Display:wght@400&family=Manrope:wght@300;400;500&family=IBM+Plex+Sans+Arabic:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#F8F4ED;--white:#FFFCF8;--blush:#E8C9C6;--champ:#D8C3A5;--taupe:#968679;--ink:#292521;
+--serif:'Cormorant Garamond',Georgia,serif;--num:'Playfair Display',Georgia,serif;--sans:'Manrope',system-ui,sans-serif;--ar:'IBM Plex Sans Arabic','Noto Sans Arabic',Tahoma,sans-serif;
+--ease:cubic-bezier(.22,.7,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--ivory);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(110% 90% at 30% 15%,var(--white),var(--ivory) 55%,#eadfcc)}
+.spot{position:fixed;z-index:0;border-radius:50%;filter:blur(90px);opacity:.45;animation:drift 40s ease-in-out infinite alternate;pointer-events:none}
+.s1{width:46vmax;height:46vmax;background:var(--blush);inset:-12vmax auto auto -8vmax}
+.s2{width:40vmax;height:40vmax;background:var(--champ);inset:auto -10vmax -14vmax auto;animation-delay:-14s}
+@keyframes drift{to{transform:translate(5vmax,4vmax) scale(1.12)}}
+.grain{position:fixed;inset:-40%;z-index:2;pointer-events:none;opacity:.08;mix-blend-mode:multiply;animation:grain 1.4s steps(5) infinite;
+background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+@keyframes grain{25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}to{transform:translate(3%,3%)}}
+.vig{position:fixed;inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse at center,transparent 58%,rgba(41,37,33,.22))}
+.dust{position:fixed;inset:0;z-index:1;pointer-events:none}
+.dust i{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--champ);opacity:0;animation:float linear infinite}
+@keyframes float{0%{transform:translateY(0);opacity:0}15%{opacity:.7}to{transform:translateY(-110vh);opacity:0}}
+.screen{position:fixed;inset:0;z-index:5;overflow-y:auto;opacity:0;transition:opacity .7s var(--ease);
+display:flex;flex-direction:column;align-items:center;justify-content:safe center;text-align:center;
+padding:max(env(safe-area-inset-top),24px) max(env(safe-area-inset-right),24px) max(env(safe-area-inset-bottom),28px) max(env(safe-area-inset-left),24px)}
+.screen[hidden]{display:none}
+.screen.show{opacity:1}
+.ar{font-family:var(--ar);font-weight:300;direction:rtl;unicode-bidi:plaintext;text-align:start;line-height:2}
+.num{font-family:var(--num);font-variant-numeric:lining-nums;font-weight:400;letter-spacing:.06em;line-height:1}
+.title{font-family:var(--serif);font-weight:300;letter-spacing:.08em;line-height:1.1}
+.label{font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--taupe)}
+.text{font-weight:300;letter-spacing:.1em;line-height:2;font-size:.98rem}
+.it{font-family:var(--serif);font-style:italic;font-weight:300;letter-spacing:.05em;font-size:1.3rem}
+.rise{opacity:0;transform:translateY(14px)}
+.show .rise{animation:rise 1.4s var(--ease) forwards;animation-delay:calc(var(--d,0)*1s)}
+@keyframes rise{to{opacity:1;transform:none}}
+.btn{position:relative;display:inline-flex;gap:14px;align-items:center;min-height:48px;padding:15px 30px;background:none;border:1px solid var(--taupe);cursor:pointer;
+font-size:.76rem;letter-spacing:.36em;text-transform:uppercase;transition:border-color .5s,letter-spacing .5s}
+.btn::after{content:"";position:absolute;inset:auto 30px 10px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+.btn:hover{border-color:var(--ink);letter-spacing:.42em}.btn:hover::after{transform:scaleX(1)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn[hidden]{display:none}
+.row2{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+.note{min-height:1.6em;margin-top:16px;font-size:.85rem;letter-spacing:.08em;color:#8d4f48}
+#quiz{justify-content:flex-start;padding:0}
+.scene{width:100%;min-height:100dvh;display:grid;grid-template-columns:55fr 45fr;align-items:center;text-align:start}
+.imgcol{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:clamp(28px,6vh,70px) clamp(24px,5vw,80px)}
+.frame{position:relative;height:min(72dvh,720px);max-width:100%;aspect-ratio:4/5;background:rgba(216,195,165,.25);border:1px solid rgba(41,37,33,.14);box-shadow:0 40px 80px -30px rgba(41,37,33,.45);overflow:hidden}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;opacity:0;transform-origin:50% 40%;transition:opacity 2.2s var(--ease)}
+.frame img.in{opacity:1;animation:kb 18s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.055)}}
+.frame::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 70px rgba(41,37,33,.22)}
+.cap{min-height:1.5em;font-family:var(--serif);font-style:italic;font-weight:300;letter-spacing:.14em;font-size:.98rem;color:var(--taupe);opacity:0;transform:translateY(6px);transition:opacity .4s}
+.cap.in{opacity:1;transform:none;transition:opacity 1.8s var(--ease) 1.4s,transform 1.8s var(--ease) 1.4s}
+.frame .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;letter-spacing:.3em;color:var(--taupe);text-transform:uppercase}
+.content{padding:clamp(28px,6vh,70px) clamp(24px,5vw,80px) clamp(28px,6vh,70px) 8px;transition:opacity .35s,transform .6s var(--ease)}
+.content.out{opacity:0;transform:translateY(8px)}
+.prog{display:flex;align-items:center;gap:16px;direction:ltr}
+.prog .bar{flex:1;height:1px;background:rgba(41,37,33,.15);position:relative}
+.prog .bar i{position:absolute;inset:0;background:var(--ink);transform-origin:left;transition:transform 1s var(--ease)}
+.qtext{font-size:clamp(1.3rem,2.3vw,2rem);margin:26px 0 30px;font-weight:300}
+.answers{display:grid;gap:12px}
+.ans{position:relative;min-height:56px;background:rgba(255,252,248,.5);border:1px solid rgba(41,37,33,.2);cursor:pointer;font-size:1.25rem;letter-spacing:.2em;text-align:center;direction:ltr;
+opacity:0;transform:translateY(10px);transition:border-color .4s,background .4s,box-shadow .5s,color .4s}
+.content.in .ans{animation:rise .8s var(--ease) forwards;animation-delay:calc(var(--i)*.09s + .15s)}
+.ans:hover:not(:disabled){border-color:var(--ink);background:var(--white)}
+.ans:disabled{cursor:default}
+.ans.good{border-color:#6f8159;box-shadow:0 0 28px rgba(150,170,110,.45);color:#44532f}
+.ans.bad{border-color:#a45f58;color:#8d4f48;animation:shake .5s}
+@keyframes shake{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.fb{min-height:72px;margin-top:20px;text-align:center}
+.fb .ok{font-family:var(--serif);letter-spacing:.4em;font-size:1.5rem;color:#44532f}
+.fb .bad{font-family:var(--ar);font-size:.95rem;color:#8d4f48;direction:rtl;unicode-bidi:plaintext}
+.fb .bad small{display:block;font:300 .72rem var(--sans);letter-spacing:.3em;margin-top:6px;direction:ltr;text-transform:uppercase}
+@media(max-width:860px){
+ .scene{grid-template-columns:1fr;align-content:start}
+ .imgcol{padding:max(env(safe-area-inset-top),18px) 22px 0}
+ .frame{height:auto;width:min(100%,340px);max-height:38dvh}
+ .content{padding:20px 24px max(env(safe-area-inset-bottom),26px)}
+ .qtext{margin:16px 0 18px;line-height:1.85}.fb{min-height:60px;margin-top:14px}
+}
+@media(max-height:520px) and (orientation:landscape){.scene{grid-template-columns:44fr 56fr}.frame{height:80dvh;max-height:none}}
+.pw{width:min(100%,360px);margin:36px auto 0;background:none;border:0;border-bottom:1px solid var(--taupe);text-align:center;letter-spacing:.3em;text-transform:uppercase;font-size:1.2rem;padding:14px 4px;direction:ltr;transition:border-color .4s}
+.pw:focus{outline:none;border-color:var(--ink)}
+.big{font-size:clamp(2.6rem,10vw,5.4rem);letter-spacing:.14em;margin:30px 0 40px;transition:letter-spacing 1.4s,opacity .8s}
+.big.fade{opacity:0;letter-spacing:.3em}
+.msg{max-width:640px;margin:22px auto 0;text-align:center;font-size:1.05rem}
+.gift{width:76px;height:76px;margin-bottom:30px;stroke:var(--ink);fill:none;stroke-width:.8}
+#finalVideo{display:block;width:min(100%,440px);max-height:68dvh;object-fit:contain;margin:34px auto 0;background:#000;border:1px solid rgba(41,37,33,.3);border-radius:6px;box-shadow:0 40px 90px -25px rgba(0,0,0,.6)}
+#vErr{min-height:1.6em;margin-top:14px;font-size:.85rem;color:#8d4f48}
+#music{position:fixed;z-index:20;inset-block-end:max(env(safe-area-inset-bottom),14px);right:max(env(safe-area-inset-right),16px);display:none;align-items:center;gap:4px;height:46px;padding:0 6px;border:1px solid rgba(41,37,33,.25);border-radius:30px;background:rgba(255,252,248,.7);backdrop-filter:blur(6px)}
+#music.on{display:flex}
+#music button{width:44px;height:44px;background:none;border:0;cursor:pointer;font-size:1rem}
+#vol{width:64px;accent-color:var(--ink)}
+#toast{position:fixed;z-index:30;inset-block-start:max(env(safe-area-inset-top),14px);left:50%;transform:translateX(-50%);padding:10px 18px;background:rgba(41,37,33,.88);color:var(--ivory);font-size:.78rem;letter-spacing:.12em;opacity:0;pointer-events:none;transition:opacity .5s;max-width:90vw;text-align:center}
+#toast.on{opacity:1}
+#denied{background:#0b0908;color:#bdb1a3;z-index:50}
+#denied p{font:300 1rem var(--serif);letter-spacing:.5em;text-transform:uppercase}
+.cinewrap{margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:24px}
+.cinewrap .ln{width:min(64vw,380px);height:1px;background:linear-gradient(90deg,transparent,var(--taupe),transparent);transform:scaleX(0)}
+.show .cinewrap .ln{animation:lnDraw 2.4s var(--ease) forwards;animation-delay:4.1s}
+.show .cinewrap .ln.b{animation-delay:4.6s}
+@keyframes lnDraw{to{transform:scaleX(1)}}
+.cine{font-family:var(--serif);font-weight:300;line-height:1.1;font-size:clamp(1.8rem,6vw,3rem);white-space:nowrap;
+letter-spacing:.5em;padding-left:.5em}
+.show .cine{animation:track 5s var(--ease) 4.4s both,push 10s cubic-bezier(.2,.6,.3,1) 4.4s both,bloom 3.4s ease-out 6s both}
+@keyframes track{from{letter-spacing:.55em;padding-left:.55em}to{letter-spacing:.2em;padding-left:.2em}}
+@keyframes push{from{transform:scale(.95)}to{transform:scale(1.04)}}
+@keyframes bloom{0%{text-shadow:0 0 0 rgba(216,195,165,0)}35%{text-shadow:0 0 30px rgba(216,195,165,.95),0 0 60px rgba(232,201,198,.55)}100%{text-shadow:0 0 14px rgba(216,195,165,.35)}}
+.cine .w{display:inline-block}
+.cine .w+.w{margin-left:.45em}
+.cine .ch{display:inline-block;opacity:0;filter:blur(14px);transform:translateY(.3em) scale(1.3)}
+.show .cine .ch{animation:chIn 1.5s var(--ease) forwards;animation-delay:calc(4.4s + var(--k)*.09s)}
+@keyframes chIn{55%{opacity:1}to{opacity:1;filter:blur(0);transform:none}}
+/* ---- curtain, dark scenes, cinematic fades ---- */
+#curtain{position:fixed;inset:0;z-index:4;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,#1d1714,#0b0908);opacity:0;transition:opacity 1.8s ease}
+#curtain.on{opacity:1}
+.dark{color:#efe7da}
+.dark .label{color:var(--champ)}
+.dark .btn{border-color:rgba(239,231,218,.5)}
+.dark .btn:hover{border-color:#efe7da}
+.dark .btn::after{background:#efe7da}
+.dark :focus-visible{outline-color:#efe7da}
+.dark .pw{border-bottom-color:rgba(239,231,218,.5)}
+.dark .pw:focus{border-color:#efe7da}
+.dark .note,.dark #vErr{color:#e0a59d}
+.dark #finalVideo{border-color:rgba(239,231,218,.18)}
+.fadeIn{opacity:0;filter:blur(8px)}
+.fadeIn.gated{visibility:hidden}
+.show .fadeIn{animation:fin 2.4s var(--ease) forwards;animation-delay:calc(var(--d,0)*1s)}
+@keyframes fin{to{opacity:1;filter:blur(0);visibility:visible}}
+@keyframes fout{from{opacity:1;filter:blur(0)}to{opacity:0;filter:blur(6px)}}
+.gatebtn{background:none;border:0;cursor:pointer;display:flex;flex-direction:column;gap:18px;align-items:center;padding:30px;animation:breathe 3.6s ease-in-out infinite}
+.gatebtn .sub{font-family:var(--serif);font-style:italic;font-weight:300;letter-spacing:.25em;font-size:1rem;opacity:.75}
+@keyframes breathe{50%{opacity:.45}}
+.cin-date{font-size:clamp(2.2rem,8vw,4.2rem);letter-spacing:.12em}
+.hushtext{font-size:clamp(1.4rem,4.4vw,2.2rem);max-width:640px;line-height:1.7;letter-spacing:.08em;opacity:0;filter:blur(8px)}
+.show .hushtext{animation:fin 1.6s var(--ease) .2s forwards}
+.show .hushtext.out{animation:fout 1s ease forwards}
+.envwrap{margin-top:34px}
+.env{display:block;width:min(52vw,190px);height:auto;overflow:visible;stroke:var(--champ);fill:none;stroke-width:.8}
+.env .flap,.env .seal{transform-box:fill-box}
+.env .flap{transform-origin:50% 0}
+.env .seal{transform-origin:center;animation:breathe 4s ease-in-out infinite}
+.opening .envwrap{filter:drop-shadow(0 0 18px rgba(216,195,165,.55))}
+.opening .env .seal{animation:sealBreak .6s ease forwards}
+.opening .env .flap{animation:flapOpen 1s var(--ease) .45s forwards}
+@keyframes sealBreak{40%{transform:scale(1.2)}to{transform:scale(.6);opacity:0}}
+@keyframes flapOpen{to{transform:scaleY(-1)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.rise,.ans{opacity:1;transform:none}.dust,.grain{display:none}}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="spot s1"></div><div class="spot s2"></div><div class="dust" id="dust"></div><div class="grain"></div><div class="vig"></div><div id="curtain" class="on"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<audio id="bgMusic" src="./music.mp3" loop preload="auto"></audio>
+<div id="music"><button id="mBtn" type="button" aria-label="Pause music">❚❚</button><input id="vol" type="range" min="0" max="1" step="0.05" value="0.6" aria-label="Music volume"></div>
+
+<main>
+<section class="screen dark" id="gate" hidden>
+ <button class="gatebtn" id="enter" type="button"><span class="label">♪ &nbsp; BEST WITH SOUND</span><span class="sub">touch to enter</span></button>
+</section>
+
+<section class="screen dark" id="intro" hidden>
+ <div class="num cin-date fadeIn" style="--d:1.2">October 10, 2024</div>
+ <p class="it fadeIn" style="margin-top:40px;--d:4.2">Some days become memories.</p>
+ <p class="it fadeIn" style="margin-top:14px;--d:7.4">Some memories become home.</p>
+ <div class="fadeIn gated" style="margin-top:52px;--d:9.6"><button class="btn" id="begin" type="button">BEGIN <span>→</span></button></div>
+</section>
+
+<section class="screen" id="quiz" hidden>
+ <div class="scene">
+  <div class="imgcol"><div class="frame" id="frame"></div><div class="cap" id="cap" aria-live="polite"></div></div>
+  <div class="content" id="content">
+   <div class="prog"><span class="label" id="pLabel"></span><span class="bar"><i id="pBar"></i></span></div>
+   <div class="qtext ar" id="qText" lang="ar" dir="rtl"></div>
+   <div class="answers" id="answers"></div>
+   <div class="fb" id="fb" aria-live="polite"></div>
+  </div>
+ </div>
+</section>
+
+<section class="screen dark" id="password" hidden>
+ <p class="it fadeIn" style="--d:.5;font-size:clamp(1.3rem,4.4vw,1.9rem)">You've made it this far.</p>
+ <p class="it fadeIn" style="margin-top:12px;--d:2.6;font-size:clamp(1.3rem,4.4vw,1.9rem)">One last thing.</p>
+ <div class="envwrap fadeIn" style="--d:4.6">
+  <svg class="env" viewBox="0 0 160 110" aria-hidden="true">
+   <rect x="4" y="14" width="152" height="92" fill="rgba(239,231,218,.04)"/>
+   <path d="M4 106L62 56M156 106L98 56"/>
+   <path class="flap" d="M4 14L80 70L156 14Z" fill="rgba(239,231,218,.07)"/>
+   <g class="seal"><circle cx="80" cy="70" r="14" fill="#8a4a45" stroke="none"/><circle cx="80" cy="70" r="10.5" fill="none" stroke="rgba(239,231,218,.35)" stroke-width=".6"/><path d="M80 75C72.5 69.5 72 64 75.5 63C77.7 62.4 79.2 63.7 80 65C80.8 63.7 82.3 62.4 84.5 63C88 64 87.5 69.5 80 75Z" fill="#efe7da" stroke="none"/></g>
+  </svg>
+ </div>
+ <input class="pw fadeIn gated" id="pwInput" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Password" placeholder="PASSWORD" style="--d:6.2;margin-top:28px">
+ <div class="note" id="pwNote" role="alert"></div>
+ <div class="fadeIn gated" style="margin-top:20px;--d:6.8"><button class="btn" id="unlock" type="button">UNLOCK <span>→</span></button></div>
+</section>
+
+<section class="screen" id="agreement" hidden>
+ <div class="label rise" style="--d:.3">THE FINAL PASSWORD</div>
+ <p class="text rise" style="margin-top:26px;--d:1.2">DO YOU AGREE THIS PASSWORD IS CORRECT</p>
+ <div class="title big rise" id="pwShow" style="--d:2.2">“I LOVE YOU”</div>
+ <div class="row2 rise" style="--d:3.2"><button class="btn" id="agree" type="button">AGREE <span>→</span></button><button class="btn" id="disagree" type="button">NOT AGREE <span>×</span></button></div>
+</section>
+
+<section class="screen" id="success" hidden>
+ <div class="num rise" style="font-size:clamp(3.2rem,12vw,6.5rem);--d:.2">10 / 10</div>
+ <div class="title rise" style="font-size:clamp(2rem,6vw,3.4rem);margin-top:24px;--d:1.2">Okay…</div>
+ <p class="text rise" style="--d:2.1">You actually made it.</p>
+ <p class="ar msg rise" lang="ar" dir="rtl" style="--d:3">لكن ف الحقيقة انا الي اول مرة اعملها واقدر اقولها ف حاجة صريحة عشان انت فعلا اول حد ابقا عايز اقولهاله صريحة واخيرا عرفت اقولها</p>
+ <div class="cinewrap"><i class="ln"></i><h2 class="cine" id="iloveyou" aria-label="I LOVE YOU"></h2><i class="ln b"></i></div>
+ <p class="it rise" style="margin-top:28px;--d:5.6">But there is one last step.</p>
+ <div class="rise" style="margin-top:34px;--d:6.6"><button class="btn" id="claim" type="button">CLAIM YOUR PRIZE <span>→</span></button></div>
+</section>
+
+<section class="screen" id="clue" hidden>
+ <svg class="gift rise" viewBox="0 0 80 80" aria-hidden="true"><rect x="12" y="34" width="56" height="36"/><rect x="8" y="24" width="64" height="12"/><path d="M40 24v46M40 24C34 8 18 12 24 22c3 4 12 2 16 2zM40 24C46 8 62 12 56 22c-3 4-12 2-16 2z"/></svg>
+ <div class="label rise" style="--d:.6">YOUR FINAL CLUE</div>
+ <h1 class="title rise" style="font-size:clamp(1.9rem,6vw,3.6rem);margin-top:22px;max-width:760px;--d:1.4">IT'S CLOSER THAN YOU THINK.</h1>
+ <p class="text rise" style="margin-top:26px;--d:2.4">You answered all 10 questions.<br><br>Now go find your 10/10 prize.</p>
+ <div class="rise" style="margin-top:38px;--d:3.4"><button class="btn" id="found" type="button">I FOUND IT <span>♡</span></button></div>
+</section>
+
+<section class="screen dark" id="hush" hidden><p class="it hushtext" id="hushText">Some things are better felt than explained.</p></section>
+
+<section class="screen dark" id="video" hidden>
+ <div class="num" style="font-size:clamp(2.6rem,10vw,5rem)">10 / 10</div>
+ <h1 class="title" style="font-size:clamp(1.3rem,4.5vw,2.4rem);letter-spacing:.2em;margin-top:18px">AND THAT WAS THE DAY.</h1>
+ <p class="it" style="margin-top:12px">To the one who made my life 10/10 🤍</p>
+ <video id="finalVideo" controls playsinline preload="auto"><source src="./final-video.mp4" type="video/mp4"></video>
+ <div id="vErr" role="alert"></div>
+ <button class="btn" id="playVideo" type="button" hidden>PLAY VIDEO <span>▶</span></button>
+</section>
+
+<section class="screen" id="denied" hidden><p>Access denied.</p></section>
+</main>
+
+<script>
+// ==========================
+// CONFIG
+// ==========================
+const PASSWORD = "I LOVE YOU";
+const WRONG_AR = "الاجابات عبارة عن باسورد قولي الاجابة الصح لهادي وهو هيديكي الباسورد 👀";
+// Music file: <audio src="./music.mp3"> | Video file: <source src="./final-video.mp4"> (edit in the HTML above)
+
+// ==========================
+// QUESTIONS
+// ==========================
+const questions = [
+    { image: "photo1.jpg", question: "اية اكتر ذكري معلقة معاكي بينا من ساعة يوم 10/10 ", options: ["I", "1", "O"], correctAnswer: "I" },
+    { image: "photo2.jpg", question: "حسيتي ان دا هو السخص الي هينفع معاكي امتا؟", options: ["T", "-", "WAS"], correctAnswer: "-" },
+    { image: "photo3.jpg", question: "إيه أكتر حاجة بتفكرك بيوم 10/10؟", options: ["L", "Y", "10"], correctAnswer: "L" },
+    { image: "photo4.jpg", question: "اية اكتر حاجة انا ريد فلاج فيها؟", options: ["M", "O", "Y"], correctAnswer: "O" },
+    { image: "photo5.jpg", question: "اي اكتر حاجة عايزاني افضل فاكرها عنك دايما؟", options: ["V", "O", "C"], correctAnswer: "V" },
+    { image: "photo6.jpg", question: "تفتكري إيه أكتر حاجة أنا عارف إنك بتحبي اعملهالك؟", options: ["A", "U", "E"], correctAnswer: "E" },
+    { image: "photo7.jpg", question: "لو جالي زهايمر اية الحاجة الي تفكرني بيكي؟", options: ["-", ".", "&"], correctAnswer: "-" },
+    { image: "photo8.jpg", question: "اية ال LOVE language بتاعة كل واحد فينا؟", options: ["Y", "I", "S"], correctAnswer: "Y" },
+    { image: "photo9.jpg", question: "تفتكري لو كنا ف لندن وانا وانت صحاب هنفضل صحاب لحد امتا؟", options: ["U", "O", "L"], correctAnswer: "O" },
+    { image: "photo10.jpg", question: "آخر سؤال… بتثقي فيا لدرجة اية والعكس؟", options: ["-", "U", "M"], correctAnswer: "U" }
+];
+
+const captions = [
+  "A memory worth keeping.", "Some moments stay.", "Exactly as it was.", "Held a little longer.", "Quietly unforgettable.",
+  "Soft, golden, ours.", "Still here. Still warm.", "The small things, remembered.", "Almost like yesterday.", "Where it all led."
+];
+
+// ==========================
+// STATE
+// ==========================
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2, "0");
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const state = { screen: null, index: 0, score: 0, busy: false, quizDone: false };
+let renderId = 0, screenToken = 0, unlocking = false, starting = false;
+
+// ==========================
+// DOM ELEMENTS
+// ==========================
+const music = $("bgMusic"), video = $("finalVideo"), curtain = $("curtain");
+const screens = [...document.querySelectorAll(".screen")];
+
+// ==========================
+// SCREEN MANAGEMENT (single source of truth)
+// ==========================
+function setScreen(name) {
+  if (state.screen === name) return Promise.resolve(false);
+  const token = ++screenToken, prev = state.screen && $(state.screen), next = $(name);
+  state.screen = name;
+  screens.forEach(s => { if (s !== next && s !== prev) { s.hidden = true; s.classList.remove("show"); } });
+  if (prev) {
+    prev.classList.remove("show"); prev.inert = true;
+    setTimeout(() => { if (state.screen !== prev.id) prev.hidden = true; }, 750);
+  }
+  // resolves true only after the new screen is fully faded in (transition finished)
+  return new Promise(resolve => {
+    const reveal = () => {
+      if (token !== screenToken) return resolve(false);
+      next.hidden = false; next.inert = false; next.scrollTop = 0; void next.offsetWidth;
+      next.classList.add("show");
+      setTimeout(() => resolve(token === screenToken), 800);
+    };
+    prev ? setTimeout(reveal, 650) : reveal();
+  });
+}
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("on"), 4200); }
+
+// ==========================
+// IMAGE SYSTEM (preload + cancellation guard)
+// ==========================
+const imageCache = new Map();
+function loadImage(src) {
+  if (!imageCache.has(src)) {
+    imageCache.set(src, new Promise(resolve => {
+      const im = new Image();
+      im.onload = async () => { try { if (im.decode) await im.decode(); } catch (e) { console.warn("decode failed", src, e); } resolve(true); };
+      im.onerror = () => { console.warn("image failed", src); resolve(false); };
+      im.src = src;
+    }));
+  }
+  return imageCache.get(src);
+}
+const preloadAll = () => Promise.all(questions.map(q => loadImage(q.image)));
+
+// ==========================
+// QUESTION RENDERING
+// ==========================
+async function renderQuestion(index) {
+  const id = ++renderId, content = $("content"), frame = $("frame");
+  state.busy = true; state.index = index;
+  content.classList.remove("in"); content.classList.add("out");
+  frame.replaceChildren();                                   // previous image detached before anything new shows
+  await wait(380);
+  if (id !== renderId) return;
+  const q = questions[index], ok = await loadImage(q.image);
+  if (id !== renderId) return;                               // stale render: abort
+  $("pLabel").textContent = pad(index + 1) + " / " + pad(questions.length);
+  $("pBar").style.transform = `scaleX(${(index + 1) / questions.length})`;
+  $("qText").textContent = q.question;
+  $("fb").replaceChildren();
+  const box = $("answers"); box.replaceChildren();
+  q.options.forEach((opt, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "ans"; b.textContent = opt; b.style.setProperty("--i", i);
+    b.addEventListener("click", () => submitAnswer(opt, b, index));
+    box.appendChild(b);
+  });
+  $("cap").classList.remove("in"); $("cap").textContent = captions[index] || "";
+  if (ok) {
+    const im = document.createElement("img"); im.alt = "Memory " + (index + 1); im.src = q.image; frame.appendChild(im);
+    requestAnimationFrame(() => requestAnimationFrame(() => { im.classList.add("in"); $("cap").classList.add("in"); }));
+  } else {
+    const f = document.createElement("div"); f.className = "fallback"; f.textContent = "Image unavailable"; frame.appendChild(f);
+  }
+  content.classList.remove("out"); void content.offsetWidth; content.classList.add("in");
+  state.busy = false;
+}
+
+// ==========================
+// ANSWER HANDLING
+// ==========================
+async function submitAnswer(choice, btn, index) {
+  if (state.busy || index !== state.index) return;
+  state.busy = true;
+  const btns = [...document.querySelectorAll(".ans")]; btns.forEach(b => b.disabled = true);
+  const id = renderId, fb = $("fb");
+  if (choice !== questions[index].correctAnswer) {
+    btn.classList.add("bad");
+    fb.innerHTML = '<div class="bad"><span class="m"></span><small>Try again.</small></div>';
+    fb.querySelector(".m").textContent = WRONG_AR;
+    await wait(700);
+    if (id !== renderId) return;
+    btn.classList.remove("bad"); btns.forEach(b => b.disabled = false); state.busy = false;
+    return;
+  }
+  btn.classList.add("good"); state.score++;
+  fb.innerHTML = '<div class="ok">CORRECT</div>';
+  await wait(950);
+  if (id !== renderId) return;
+  if (index < questions.length - 1) { renderQuestion(index + 1); }
+  else {
+    state.quizDone = true; state.busy = false;
+    curtain.classList.add("on");                              // the room slowly goes dark, then the sealed letter appears
+    setScreen("password").then(ok => { if (ok) setTimeout(() => { if (state.screen === "password") $("pwInput").focus({ preventScroll: true }); }, 6500); });
+  }
+}
+
+// ==========================
+// MUSIC CONTROLLER
+// ==========================
+function syncMusicUI() { const b = $("mBtn"); b.textContent = music.paused ? "▶" : "❚❚"; b.setAttribute("aria-label", music.paused ? "Play music" : "Pause music"); }
+["play", "pause", "ended"].forEach(e => music.addEventListener(e, syncMusicUI));
+music.addEventListener("volumechange", () => { $("vol").value = music.volume; });
+music.addEventListener("error", () => { console.error("music error", music.error); toast("Music couldn't be loaded — the experience continues without it."); });
+music.volume = 0.6;
+$("vol").addEventListener("input", e => { music.volume = +e.target.value; });
+let musicUserPaused = false;                                 // true only when the listener pressed pause themselves
+$("mBtn").addEventListener("click", () => {
+  musicUserPaused = !music.paused;
+  if (music.paused) music.play().catch(err => { console.error("music play failed", err); toast("Music playback was blocked."); });
+  else music.pause();
+});
+
+// ==========================
+// BEGIN
+// ==========================
+function fadeMusic(to, ms) {
+  const from = music.volume, t0 = performance.now();
+  const step = () => { const k = Math.min(1, (performance.now() - t0) / ms); music.volume = from + (to - from) * k; if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+let entered = false;
+$("enter").addEventListener("click", () => {                 // the first touch: lets the browser start the music
+  if (entered) return; entered = true; $("enter").disabled = true;
+  const target = 0.6; music.volume = 0;
+  const p = music.play();
+  $("music").classList.add("on");
+  if (p) p.then(() => fadeMusic(target, 6000)).catch(err => { music.volume = target; console.error("music play failed", err); toast("Music couldn't start — the experience continues without it."); });
+  setScreen("intro");
+});
+$("begin").addEventListener("click", async () => {
+  if (starting) return; starting = true; $("begin").disabled = true;
+  curtain.classList.remove("on");                            // the light comes up
+  await Promise.race([preloadAll(), wait(6000)]);
+  setScreen("quiz"); renderQuestion(0);
+});
+
+// ==========================
+// PASSWORD
+// ==========================
+function submitPassword() {
+  if (unlocking || !state.quizDone) return;
+  const val = $("pwInput").value.trim().replace(/\s+/g, " ").toUpperCase();
+  if (val !== PASSWORD) { $("pwNote").textContent = "That's not it — try again."; return; }
+  unlocking = true; $("pwNote").textContent = ""; $("unlock").disabled = true; $("pwInput").blur();
+  $("password").classList.add("opening");                    // seal breaks, flap opens
+  setTimeout(() => curtain.classList.remove("on"), 900);     // light returns
+  setTimeout(() => setScreen("agreement"), 1700);
+}
+$("unlock").addEventListener("click", submitPassword);
+$("pwInput").addEventListener("keydown", e => { if (e.key === "Enter") submitPassword(); });
+
+// ==========================
+// AGREEMENT / SUCCESS / CLUE
+// ==========================
+$("agree").addEventListener("click", () => {
+  $("agree").disabled = $("disagree").disabled = true; $("pwShow").classList.add("fade");
+  setTimeout(() => setScreen("success"), 900);
+});
+$("disagree").addEventListener("click", () => {             // ends THIS visit only; nothing is stored
+  $("agree").disabled = $("disagree").disabled = true; music.pause(); $("music").classList.remove("on");
+  window.close(); setScreen("denied");
+});
+$("claim").addEventListener("click", () => setScreen("clue"));
+
+// ==========================
+// FINAL VIDEO
+// ==========================
+function showVideoError(msg) { $("vErr").textContent = msg; $("playVideo").hidden = false; }
+function tryPlayVideo() {
+  const p = video.play();
+  if (p) p.catch(err => { console.error("video play failed", err); showVideoError("The video couldn't start automatically."); });
+}
+// music pauses ONLY while the video is actually playing, and resumes from the same spot when it stops
+let priming = false;                                         // silent unlock of the video element during the click
+video.addEventListener("playing", () => { if (priming) return; $("vErr").textContent = ""; $("playVideo").hidden = true; music.pause(); });
+const resumeMusic = () => { if (state.screen === "video" && !musicUserPaused) music.play().catch(() => {}); };
+video.addEventListener("pause", () => { if (priming) { priming = false; return; } resumeMusic(); });
+video.addEventListener("ended", resumeMusic);
+video.addEventListener("error", () => { console.error("video error", video.error); showVideoError("The video file couldn't be loaded."); });
+$("playVideo").addEventListener("click", () => { $("vErr").textContent = ""; video.load(); tryPlayVideo(); });
+function primeVideo() {                                      // muted play+pause inside the click so the browser lets us play with sound later
+  priming = true; video.muted = true;
+  const p = video.play();
+  if (p) p.then(() => { video.pause(); video.currentTime = 0; video.muted = false; }).catch(() => { priming = false; video.muted = false; });
+  else { priming = false; video.muted = false; }
+}
+$("found").addEventListener("click", async () => {
+  if (state.screen !== "clue") return;
+  $("found").disabled = true; renderId++; $("frame").replaceChildren();
+  primeVideo();
+  curtain.classList.add("on");                               // fade toward black while the clue dissolves
+  if (!(await setScreen("hush"))) return;
+  await wait(1100);                                          // let the sentence breathe
+  $("hushText").classList.add("out");
+  await wait(1000);
+  const ready = await setScreen("video");                    // music keeps playing until the video really starts
+  if (ready && state.screen === "video") { video.currentTime = 0; video.muted = false; tryPlayVideo(); }
+});
+
+// ==========================
+// INITIALIZATION
+// ==========================
+(function init() {
+  const d = $("dust");
+  for (let i = 0; i < 22; i++) {
+    const s = document.createElement("i");
+    s.style.cssText = `left:${Math.random() * 100}%;bottom:-10px;animation-duration:${30 + Math.random() * 40}s;animation-delay:${-Math.random() * 60}s`;
+    d.appendChild(s);
+  }
+  const ily = $("iloveyou"); let k = 0;
+  "I LOVE YOU".split(" ").forEach(word => {
+    const w = document.createElement("span"); w.className = "w"; w.setAttribute("aria-hidden", "true");
+    [...word].forEach(c => { const ch = document.createElement("span"); ch.className = "ch"; ch.textContent = c; ch.style.setProperty("--k", k++); w.appendChild(ch); });
+    ily.appendChild(w);
+  });
+  preloadAll();                                              // warm the image cache silently
+  setScreen("gate");
+})();
+</script>
+</body>
+</html>
